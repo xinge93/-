@@ -1,0 +1,31 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.9.2
+2 info using node@v22.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/lee/Documents/作品集/.npmrc
+5 silly config load:file:/Users/lee/.npmrc
+6 silly config load:file:/Users/lee/.npm-global/etc/npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/lee/Documents/作品集/.npm-cache/_logs/2026-06-23T04_54_01_067Z-
+10 verbose logfile /Users/lee/Documents/作品集/.npm-cache/_logs/2026-06-23T04_54_01_067Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 http fetch GET https://registry.npmmirror.com/npm attempt 1 failed with ENOTFOUND
+14 silly idealTree buildDeps
+15 silly fetch manifest @vitejs/plugin-react@^5.0.0
+16 silly packumentCache full:https://registry.npmmirror.com/@vitejs%2fplugin-react cache-miss
+17 http fetch GET https://registry.npmmirror.com/@vitejs%2fplugin-react attempt 1 failed with ENOTFOUND
+18 http fetch GET https://registry.npmmirror.com/npm attempt 2 failed with ENOTFOUND
+19 http fetch GET https://registry.npmmirror.com/@vitejs%2fplugin-react attempt 2 failed with ENOTFOUND
+20 http fetch GET https://registry.npmmirror.com/npm attempt 3 failed with ENOTFOUND
+21 http fetch GET https://registry.npmmirror.com/@vitejs%2fplugin-react attempt 3 failed with ENOTFOUND
+22 silly fetch manifest vite@^7.0.0
+23 silly packumentCache full:https://registry.npmmirror.com/vite cache-miss
+24 http fetch GET https://registry.npmmirror.com/vite attempt 1 failed with ENOTFOUND
+25 http fetch GET https://registry.npmmirror.com/vite attempt 2 failed with ENOTFOUND
+26 http fetch GET https://registry.npmmirror.com/vite attempt 3 failed with ENOTFOUND
+27 silly fetch manifest react@^19.0.0
+28 silly packumentCache full:https://registry.npmmirror.com/react cache-miss
+29 http fetch GET https://registry.npmmirror.com/react attempt 1 failed with ENOTFOUND
+30 http fetch GET https://registry.npmmirror.com/react attempt 2 failed with ENOTFOUND

@@ -1,0 +1,359 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.9.2
+2 info using node@v22.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/lee/Documents/作品集/.npmrc
+5 silly config load:file:/Users/lee/.npmrc
+6 silly config load:file:/Users/lee/.npm-global/etc/npmrc
+7 verbose title npm install ogl
+8 verbose argv "install" "ogl" "--cache" ".npm-cache" "--registry" "https://registry.npmjs.org"
+9 verbose logfile logs-max:10 dir:/Users/lee/Documents/作品集/.npm-cache/_logs/2026-06-23T05_15_37_855Z-
+10 verbose logfile /Users/lee/Documents/作品集/.npm-cache/_logs/2026-06-23T05_15_37_855Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest ogl@*
+15 silly packumentCache full:https://registry.npmjs.org/ogl cache-miss
+16 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+17 http fetch GET 200 https://registry.npmjs.org/ogl 1689ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/ogl set size:undefined disposed:false
+19 silly placeDep ROOT ogl@1.0.11 OK for: lixiaoxin-portfolio@1.0.0 want: *
+20 silly reify moves {}
+21 silly audit bulk request {
+21 silly audit   '@babel/code-frame': [ '7.29.7' ],
+21 silly audit   '@babel/compat-data': [ '7.29.7' ],
+21 silly audit   '@babel/core': [ '7.29.7' ],
+21 silly audit   '@babel/generator': [ '7.29.7' ],
+21 silly audit   '@babel/helper-compilation-targets': [ '7.29.7' ],
+21 silly audit   '@babel/helper-globals': [ '7.29.7' ],
+21 silly audit   '@babel/helper-module-imports': [ '7.29.7' ],
+21 silly audit   '@babel/helper-module-transforms': [ '7.29.7' ],
+21 silly audit   '@babel/helper-plugin-utils': [ '7.29.7' ],
+21 silly audit   '@babel/helper-string-parser': [ '7.29.7' ],
+21 silly audit   '@babel/helper-validator-identifier': [ '7.29.7' ],
+21 silly audit   '@babel/helper-validator-option': [ '7.29.7' ],
+21 silly audit   '@babel/helpers': [ '7.29.7' ],
+21 silly audit   '@babel/parser': [ '7.29.7' ],
+21 silly audit   '@babel/plugin-transform-react-jsx-self': [ '7.29.7' ],
+21 silly audit   '@babel/plugin-transform-react-jsx-source': [ '7.29.7' ],
+21 silly audit   '@babel/template': [ '7.29.7' ],
+21 silly audit   '@babel/traverse': [ '7.29.7' ],
+21 silly audit   '@babel/types': [ '7.29.7' ],
+21 silly audit   '@esbuild/aix-ppc64': [ '0.27.7' ],
+21 silly audit   '@esbuild/android-arm': [ '0.27.7' ],
+21 silly audit   '@esbuild/android-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/android-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/darwin-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/darwin-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/freebsd-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/freebsd-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-arm': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-ia32': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-loong64': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-mips64el': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-ppc64': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-riscv64': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-s390x': [ '0.27.7' ],
+21 silly audit   '@esbuild/linux-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/netbsd-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/netbsd-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/openbsd-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/openbsd-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/openharmony-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/sunos-x64': [ '0.27.7' ],
+21 silly audit   '@esbuild/win32-arm64': [ '0.27.7' ],
+21 silly audit   '@esbuild/win32-ia32': [ '0.27.7' ],
+21 silly audit   '@esbuild/win32-x64': [ '0.27.7' ],
+21 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+21 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+21 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+21 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+21 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+21 silly audit   '@rolldown/pluginutils': [ '1.0.0-rc.3' ],
+21 silly audit   '@rollup/rollup-android-arm-eabi': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-android-arm64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-darwin-arm64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-darwin-x64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-freebsd-arm64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-freebsd-x64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-arm-gnueabihf': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-arm-musleabihf': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-arm64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-arm64-musl': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-loong64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-loong64-musl': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-ppc64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-ppc64-musl': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-riscv64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-riscv64-musl': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-s390x-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-x64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-linux-x64-musl': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-openbsd-x64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-openharmony-arm64': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-win32-arm64-msvc': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-win32-ia32-msvc': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-win32-x64-gnu': [ '4.62.2' ],
+21 silly audit   '@rollup/rollup-win32-x64-msvc': [ '4.62.2' ],
+21 silly audit   '@types/babel__core': [ '7.20.5' ],
+21 silly audit   '@types/babel__generator': [ '7.27.0' ],
+21 silly audit   '@types/babel__template': [ '7.4.4' ],
+21 silly audit   '@types/babel__traverse': [ '7.28.0' ],
+21 silly audit   '@types/estree': [ '1.0.9' ],
+21 silly audit   '@vitejs/plugin-react': [ '5.2.0' ],
+21 silly audit   'baseline-browser-mapping': [ '2.10.38' ],
+21 silly audit   browserslist: [ '4.28.4' ],
+21 silly audit   'caniuse-lite': [ '1.0.30001799' ],
+21 silly audit   'convert-source-map': [ '2.0.0' ],
+21 silly audit   debug: [ '4.4.3' ],
+21 silly audit   'electron-to-chromium': [ '1.5.377' ],
+21 silly audit   esbuild: [ '0.27.7' ],
+21 silly audit   escalade: [ '3.2.0' ],
+21 silly audit   fdir: [ '6.5.0' ],
+21 silly audit   fsevents: [ '2.3.3' ],
+21 silly audit   gensync: [ '1.0.0-beta.2' ],
+21 silly audit   'js-tokens': [ '4.0.0' ],
+21 silly audit   jsesc: [ '3.1.0' ],
+21 silly audit   json5: [ '2.2.3' ],
+21 silly audit   'lru-cache': [ '5.1.1' ],
+21 silly audit   ms: [ '2.1.3' ],
+21 silly audit   nanoid: [ '3.3.15' ],
+21 silly audit   'node-releases': [ '2.0.48' ],
+21 silly audit   picocolors: [ '1.1.1' ],
+21 silly audit   picomatch: [ '4.0.4' ],
+21 silly audit   postcss: [ '8.5.15' ],
+21 silly audit   react: [ '19.2.7' ],
+21 silly audit   'react-dom': [ '19.2.7' ],
+21 silly audit   'react-refresh': [ '0.18.0' ],
+21 silly audit   rollup: [ '4.62.2' ],
+21 silly audit   scheduler: [ '0.27.0' ],
+21 silly audit   semver: [ '6.3.1' ],
+21 silly audit   'source-map-js': [ '1.2.1' ],
+21 silly audit   tinyglobby: [ '0.2.17' ],
+21 silly audit   'update-browserslist-db': [ '1.2.3' ],
+21 silly audit   vite: [ '7.3.5' ],
+21 silly audit   yallist: [ '3.1.1' ],
+21 silly audit   ogl: [ '1.0.11' ]
+21 silly audit }
+22 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-x64-msvc
+23 silly reify mark deleted [
+23 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-x64-msvc'
+23 silly reify ]
+24 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-x64-gnu
+25 silly reify mark deleted [
+25 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-x64-gnu'
+25 silly reify ]
+26 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-ia32-msvc
+27 silly reify mark deleted [
+27 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-ia32-msvc'
+27 silly reify ]
+28 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-arm64-msvc
+29 silly reify mark deleted [
+29 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-win32-arm64-msvc'
+29 silly reify ]
+30 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-openharmony-arm64
+31 silly reify mark deleted [
+31 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-openharmony-arm64'
+31 silly reify ]
+32 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-openbsd-x64
+33 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-openbsd-x64' ]
+34 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-x64-musl
+35 silly reify mark deleted [
+35 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-x64-musl'
+35 silly reify ]
+36 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-x64-gnu
+37 silly reify mark deleted [
+37 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-x64-gnu'
+37 silly reify ]
+38 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-s390x-gnu
+39 silly reify mark deleted [
+39 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-s390x-gnu'
+39 silly reify ]
+40 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-riscv64-musl
+41 silly reify mark deleted [
+41 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-riscv64-musl'
+41 silly reify ]
+42 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-riscv64-gnu
+43 silly reify mark deleted [
+43 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-riscv64-gnu'
+43 silly reify ]
+44 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-ppc64-musl
+45 silly reify mark deleted [
+45 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-ppc64-musl'
+45 silly reify ]
+46 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-ppc64-gnu
+47 silly reify mark deleted [
+47 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-ppc64-gnu'
+47 silly reify ]
+48 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-loong64-musl
+49 silly reify mark deleted [
+49 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-loong64-musl'
+49 silly reify ]
+50 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-loong64-gnu
+51 silly reify mark deleted [
+51 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-loong64-gnu'
+51 silly reify ]
+52 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm64-musl
+53 silly reify mark deleted [
+53 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm64-musl'
+53 silly reify ]
+54 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm64-gnu
+55 silly reify mark deleted [
+55 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm64-gnu'
+55 silly reify ]
+56 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm-musleabihf
+57 silly reify mark deleted [
+57 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm-musleabihf'
+57 silly reify ]
+58 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm-gnueabihf
+59 silly reify mark deleted [
+59 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-linux-arm-gnueabihf'
+59 silly reify ]
+60 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-freebsd-x64
+61 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-freebsd-x64' ]
+62 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-freebsd-arm64
+63 silly reify mark deleted [
+63 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-freebsd-arm64'
+63 silly reify ]
+64 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-darwin-x64
+65 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-darwin-x64' ]
+66 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-android-arm64
+67 silly reify mark deleted [
+67 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-android-arm64'
+67 silly reify ]
+68 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@rollup/rollup-android-arm-eabi
+69 silly reify mark deleted [
+69 silly reify   '/Users/lee/Documents/作品集/node_modules/@rollup/rollup-android-arm-eabi'
+69 silly reify ]
+70 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/win32-x64
+71 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/win32-x64' ]
+72 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/win32-ia32
+73 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/win32-ia32' ]
+74 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/win32-arm64
+75 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/win32-arm64' ]
+76 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/sunos-x64
+77 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/sunos-x64' ]
+78 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/openharmony-arm64
+79 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/openharmony-arm64' ]
+80 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/openbsd-x64
+81 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/openbsd-x64' ]
+82 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/openbsd-arm64
+83 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/openbsd-arm64' ]
+84 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/netbsd-x64
+85 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/netbsd-x64' ]
+86 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/netbsd-arm64
+87 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/netbsd-arm64' ]
+88 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-x64
+89 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-x64' ]
+90 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-s390x
+91 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-s390x' ]
+92 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-riscv64
+93 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-riscv64' ]
+94 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-ppc64
+95 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-ppc64' ]
+96 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-mips64el
+97 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-mips64el' ]
+98 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-loong64
+99 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-loong64' ]
+100 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-ia32
+101 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-ia32' ]
+102 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-arm64
+103 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-arm64' ]
+104 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/linux-arm
+105 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/linux-arm' ]
+106 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/freebsd-x64
+107 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/freebsd-x64' ]
+108 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/freebsd-arm64
+109 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/freebsd-arm64' ]
+110 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/darwin-x64
+111 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/darwin-x64' ]
+112 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/android-x64
+113 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/android-x64' ]
+114 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/android-arm64
+115 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/android-arm64' ]
+116 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/android-arm
+117 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/android-arm' ]
+118 verbose reify failed optional dependency /Users/lee/Documents/作品集/node_modules/@esbuild/aix-ppc64
+119 silly reify mark deleted [ '/Users/lee/Documents/作品集/node_modules/@esbuild/aix-ppc64' ]
+120 http cache ogl@https://registry.npmjs.org/ogl/-/ogl-1.0.11.tgz 1ms (cache hit)
+121 http cache fsevents@https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz 0ms (cache hit)
+122 silly tarball no local data for ogl@https://registry.npmjs.org/ogl/-/ogl-1.0.11.tgz. Extracting by manifest.
+123 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 302ms
+124 silly audit report {
+124 silly audit report   esbuild: [
+124 silly audit report     {
+124 silly audit report       id: 1120680,
+124 silly audit report       url: 'https://github.com/advisories/GHSA-g7r4-m6w7-qqqr',
+124 silly audit report       title: 'esbuild allows arbitrary file read when running the development server on Windows',
+124 silly audit report       severity: 'low',
+124 silly audit report       vulnerable_versions: '>=0.27.3 <0.28.1',
+124 silly audit report       cwe: [Array],
+124 silly audit report       cvss: [Object]
+124 silly audit report     }
+124 silly audit report   ]
+124 silly audit report }
+125 silly packumentCache corgi:https://registry.npmjs.org/esbuild cache-miss
+126 http fetch GET 200 https://registry.npmjs.org/esbuild 204ms (cache revalidated)
+127 silly packumentCache corgi:https://registry.npmjs.org/esbuild set size:887361 disposed:false
+128 silly packumentCache corgi:https://registry.npmjs.org/vite cache-miss
+129 http fetch GET 200 https://registry.npmjs.org/vite 208ms (cache revalidated)
+130 silly packumentCache corgi:https://registry.npmjs.org/vite set size:2264592 disposed:false
+131 http fetch GET 200 https://registry.npmjs.org/ogl/-/ogl-1.0.11.tgz 1539ms (cache miss)
+132 silly ADD node_modules/ogl
+133 silly ADD node_modules/fsevents
+134 silly ADD
+135 silly ADD
+136 silly ADD
+137 silly ADD
+138 silly ADD
+139 silly ADD
+140 silly ADD
+141 silly ADD
+142 silly ADD
+143 silly ADD
+144 silly ADD
+145 silly ADD
+146 silly ADD
+147 silly ADD
+148 silly ADD
+149 silly ADD
+150 silly ADD
+151 silly ADD
+152 silly ADD
+153 silly ADD
+154 silly ADD
+155 silly ADD
+156 silly ADD
+157 silly ADD
+158 silly ADD
+159 silly ADD
+160 silly ADD
+161 silly ADD
+162 silly ADD
+163 silly ADD
+164 silly ADD
+165 silly ADD
+166 silly ADD
+167 silly ADD
+168 silly ADD
+169 silly ADD
+170 silly ADD
+171 silly ADD
+172 silly ADD
+173 silly ADD
+174 silly ADD
+175 silly ADD
+176 silly ADD
+177 silly ADD
+178 silly ADD
+179 silly ADD
+180 silly ADD
+181 silly ADD
+182 silly ADD
+183 verbose cwd /Users/lee/Documents/作品集
+184 verbose os Darwin 24.6.0
+185 verbose node v22.14.0
+186 verbose npm  v10.9.2
+187 verbose exit 0
+188 info ok
