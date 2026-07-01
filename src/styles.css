@@ -50,7 +50,7 @@ a {
 }
 
 .section-pad {
-  padding: 150px 0;
+  padding: 120px 0;
 }
 
 .site-header {
@@ -689,6 +689,14 @@ a {
   font-size: 70px;
 }
 
+.projects-section {
+  padding-bottom: 100px;
+}
+
+.strength-section {
+  padding-top: 100px;
+}
+
 .strength-section .section-heading h2 {
   font-size: 70px;
 }
@@ -1053,8 +1061,7 @@ a {
 
 .contact-section {
   display: grid;
-  min-height: 100svh;
-  align-items: center;
+  align-items: start;
   padding: 120px 0;
   background:
     radial-gradient(circle at 74% 40%, rgba(63, 124, 255, 0.14), transparent 36rem),
@@ -1069,6 +1076,7 @@ a {
 .contact-shell h2 {
   max-width: 1180px;
   font-size: 55px;
+  line-height: 1.18;
 }
 
 .contact-shell p {

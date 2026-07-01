@@ -303,9 +303,6 @@ function SiteHeader() {
           </a>
         ))}
       </nav>
-      <a className="nav-contact" href={`mailto:${email}`}>
-        联系我
-      </a>
     </header>
   );
 }
@@ -557,7 +554,7 @@ function App() {
           <section id="contact" className="contact-section">
             <div className="shell contact-shell reveal">
               <span className="eyebrow">Contact</span>
-              <h2>让复杂产品拥有清晰、克制且可靠的体验。</h2>
+              <h2>持续探索设计的边界，让复杂产品变得更清晰、更好用。</h2>
               <a className="button secondary contact-mail" href={`mailto:${email}`}>
                 {email}
               </a>
