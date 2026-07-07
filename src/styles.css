@@ -1322,9 +1322,11 @@ a {
 
   .site-header {
     position: sticky;
-    top: 12px;
+    top: 24px;
     transform: none;
-    left: auto;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
     grid-template-columns: minmax(170px, 1fr) auto;
     gap: 16px;
   }
@@ -1467,13 +1469,18 @@ a {
   .site-header {
     display: flex;
     width: calc(100% - 32px);
+    right: 0;
+    left: 0;
+    justify-content: flex-start;
     align-items: center;
+    margin: 0 auto;
     padding: 10px;
     overflow: visible;
   }
 
   .brand {
     max-width: 100%;
+    margin: 0;
   }
 
   .brand-symbol {
