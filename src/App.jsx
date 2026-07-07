@@ -3,6 +3,8 @@ import BorderGlow from "./BorderGlow.jsx";
 import SoftAurora from "./SoftAurora.jsx";
 import SplitText from "./SplitText.jsx";
 import TiltedPhoto from "./TiltedPhoto.jsx";
+import AnalyticsDashboard from "./AnalyticsDashboard.jsx";
+import { initAnalytics, trackCaseClose, trackCaseOpen, trackProjectClick } from "./analytics.js";
 
 const email = "516295798@qq.com";
 
@@ -260,6 +262,18 @@ function useActiveCase() {
   return activeCase;
 }
 
+function useCurrentHash() {
+  const [hash, setHash] = useState(() => window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  return hash;
+}
+
 function scrollToHomeSection(href) {
   const targetId = href.replace("#", "");
   const scroll = () => {
@@ -278,7 +292,8 @@ function scrollToHomeSection(href) {
 
 function SiteHeader() {
   const handleAnchorClick = (event, href) => {
-    if (!window.location.hash.startsWith("#case/")) return;
+    const shouldRestoreHome = window.location.hash.startsWith("#case/") || window.location.hash === "#analytics";
+    if (!shouldRestoreHome) return;
 
     event.preventDefault();
     window.location.hash = href;
@@ -286,28 +301,44 @@ function SiteHeader() {
   };
 
   return (
-    <header className="site-header">
-      <a className="brand" href="#top" aria-label="返回首页" onClick={(event) => handleAnchorClick(event, "#top")}>
-        <span className="brand-symbol">
-          <img src="/images/brand-logo.png" alt="" />
-        </span>
-        <span>
-          <strong>李晓鑫</strong>
-          <small>Visual / AI / UI Designer</small>
-        </span>
-      </a>
-      <nav className="main-nav" aria-label="主导航">
+    <>
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="返回首页" onClick={(event) => handleAnchorClick(event, "#top")}>
+          <span className="brand-symbol">
+            <img src="/images/brand-logo.png" alt="" />
+          </span>
+          <span>
+            <strong>李晓鑫</strong>
+            <small>Visual / AI / UI Designer</small>
+          </span>
+        </a>
+        <nav className="main-nav" aria-label="主导航">
+          {navItems.map(([label, href]) => (
+            <a key={href} href={href} onClick={(event) => handleAnchorClick(event, href)}>
+              {label}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      <nav className="mobile-bottom-nav" aria-label="移动端主导航">
         {navItems.map(([label, href]) => (
           <a key={href} href={href} onClick={(event) => handleAnchorClick(event, href)}>
             {label}
           </a>
         ))}
       </nav>
-    </header>
+    </>
   );
 }
 
 function CasePdfPage({ project }) {
+  useEffect(() => {
+    const startedAt = Date.now();
+    trackCaseOpen(project);
+    return () => trackCaseClose(project, Date.now() - startedAt);
+  }, [project]);
+
   return (
     <>
       <SiteHeader />
@@ -331,11 +362,26 @@ function CasePdfPage({ project }) {
 }
 
 function App() {
+  const currentHash = useCurrentHash();
   const activeCase = useActiveCase();
-  const isHomePage = !activeCase;
+  const isAnalyticsPage = currentHash === "#analytics";
+  const isHomePage = !activeCase && !isAnalyticsPage;
 
   useRevealOnScroll(isHomePage);
   useHeroVideoPlayback(isHomePage);
+
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
+  if (isAnalyticsPage) {
+    return (
+      <>
+        <SiteHeader />
+        <AnalyticsDashboard />
+      </>
+    );
+  }
 
   if (activeCase) {
     return (
@@ -510,7 +556,12 @@ function App() {
                       </div>
                     </div>
                     {project.pdfPages ? (
-                      <a className="project-hit-area" href={`#case/${project.slug}`} aria-label={`查看${project.title}作品集`} />
+                      <a
+                        className="project-hit-area"
+                        href={`#case/${project.slug}`}
+                        aria-label={`查看${project.title}作品集`}
+                        onClick={() => trackProjectClick(project)}
+                      />
                     ) : null}
                   </BorderGlow>
                 ))}
