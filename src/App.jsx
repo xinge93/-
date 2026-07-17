@@ -115,7 +115,7 @@ const projects = [
     layout: "wide",
     visualClass: "illustration",
     slug: "illustration-logo",
-    pdfPages: Array.from({ length: 18 }, (_, index) => `/cases/illustration-logo/page-${String(index + 1).padStart(2, "0")}.png`),
+    pdfPages: Array.from({ length: 17 }, (_, index) => `/cases/illustration-logo/page-${String(index + 1).padStart(2, "0")}.png`),
   },
   {
     title: "数字孪生可视化大屏",
