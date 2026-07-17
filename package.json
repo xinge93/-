@@ -10,7 +10,6 @@
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.110.6",
     "@vitejs/plugin-react": "^5.0.0",
     "ogl": "^1.0.11",
     "postprocessing": "^6.39.1",

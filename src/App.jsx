@@ -1,12 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BorderGlow from "./BorderGlow.jsx";
 import SoftAurora from "./SoftAurora.jsx";
 import SplitText from "./SplitText.jsx";
 import TiltedPhoto from "./TiltedPhoto.jsx";
 import AnalyticsDashboard from "./AnalyticsDashboard.jsx";
 import { initAnalytics, trackCaseClose, trackCaseOpen, trackProjectClick } from "./analytics.js";
-import { listManagedProjects, removeManagedProject, saveManagedProject, updateManagedProject } from "./projectStore.js";
-import { adminEmail, isAdminUser, isSupabaseConfigured, supabase } from "./supabase.js";
 
 const email = "516295798@qq.com";
 
@@ -72,7 +70,7 @@ const workExperiences = [
   },
 ];
 
-const baseProjects = [
+const projects = [
   {
     title: "运连网集团OA系统",
     subtitle: "Gotfreight OA System",
@@ -85,8 +83,6 @@ const baseProjects = [
     color: "cyan",
     image: "/images/project-oa-cover.png",
     slug: "oa-system",
-    category: "web",
-    featured: true,
     pdf: "/pdfs/oa-system.pdf",
     pdfPages: Array.from({ length: 13 }, (_, index) => `/cases/oa-system/page-${String(index + 1).padStart(2, "0")}.png`),
   },
@@ -102,43 +98,24 @@ const baseProjects = [
     color: "coral",
     image: "/images/project-ai-wealth-cover.png",
     slug: "ai-wealth-advisor",
-    category: "mobile",
-    featured: true,
     pdf: "/pdfs/ai-wealth-advisor.pdf",
     pdfPages: Array.from({ length: 7 }, (_, index) => `/cases/ai-wealth-advisor/page-${index + 1}.png`),
   },
   {
-    title: "插画&卡通形象设计",
-    subtitle: "Illustration design",
-    type: "品牌视觉 / 插画 / 卡通形象",
+    title: "插画&LOGO视觉设计",
+    subtitle: "Illustration & LOGO visual design",
+    type: "品牌视觉 / 插画 / LOGO",
     year: "2024",
     summary:
-      "负责宣传插画、卡通形象等视觉设计，搭建统一的品牌视觉规范，并结合 AI 工作流提升设计效率与创意产出。",
-    tags: ["插画设计", "卡通形象"],
+      "负责宣传插画、Logo及品牌包装、卡通形象等视觉设计，搭建统一的品牌视觉规范，并结合 AI 工作流提升设计效率与创意产出。",
+    tags: ["插画设计", "卡通形象", "LOGO设计"],
     stat: "成功交付",
     color: "green",
     image: "/images/project-illustration-logo-cover.png",
     layout: "wide",
     visualClass: "illustration",
     slug: "illustration-logo",
-    category: "other",
-    featured: true,
-    pdfPages: Array.from({ length: 8 }, (_, index) => `/cases/illustration-logo/page-${String(index + 1).padStart(2, "0")}.png`),
-  },
-  {
-    title: "园企通LOGO设计",
-    subtitle: "Park-Enterprise Connect",
-    type: "品牌视觉 / LOGO / 品牌包装",
-    year: "2024",
-    summary:
-      "整体造型呈现网状延展感，体现平台对园区服务的整合与覆盖能力，打通企业服务、资源对接与线上交流等场景，持续为园区及企业创造更大价值。",
-    tags: ["LOGO设计", "品牌包装"],
-    stat: "品牌交付",
-    color: "cyan",
-    image: "/images/project-park-enterprise-cover.png",
-    slug: "park-enterprise-connect",
-    category: "other",
-    pdfPages: Array.from({ length: 9 }, (_, index) => `/cases/park-enterprise-connect/page-${String(index + 1).padStart(2, "0")}.png`),
+    pdfPages: Array.from({ length: 18 }, (_, index) => `/cases/illustration-logo/page-${String(index + 1).padStart(2, "0")}.png`),
   },
   {
     title: "数字孪生可视化大屏",
@@ -152,8 +129,6 @@ const baseProjects = [
     color: "violet",
     image: "/images/project-digital-visual-cover.png",
     slug: "digital-twin-visualization",
-    category: "web",
-    featured: true,
     pdf: "/pdfs/digital-twin-visualization.pdf",
     pdfPages: Array.from({ length: 8 }, (_, index) => `/cases/digital-twin-visualization/page-${index + 1}.png`),
   },
@@ -169,8 +144,6 @@ const baseProjects = [
     color: "amber",
     image: "/images/yizhuang-saas-cover.png",
     slug: "yizhuang-saas",
-    category: "web",
-    featured: true,
     pdf: "/pdfs/yizhuang-saas.pdf",
     pdfPages: Array.from({ length: 11 }, (_, index) => `/cases/yizhuang-saas/page-${String(index + 1).padStart(2, "0")}.png`),
   },
@@ -186,7 +159,6 @@ const baseProjects = [
     color: "coral",
     image: "/images/smart-park-app-cover.png",
     slug: "shenzhen-metro",
-    category: "mobile",
     pdfPages: Array.from({ length: 10 }, (_, index) => `/cases/shenzhen-metro/page-${String(index + 1).padStart(2, "0")}.png`),
   },
 ];
@@ -224,7 +196,7 @@ const strengths = [
   },
 ];
 
-function useRevealOnScroll(enabled, refreshKey) {
+function useRevealOnScroll(enabled) {
   useEffect(() => {
     if (!enabled) return undefined;
 
@@ -242,7 +214,7 @@ function useRevealOnScroll(enabled, refreshKey) {
 
     document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, [enabled, refreshKey]);
+  }, [enabled]);
 }
 
 function useHeroVideoPlayback(enabled) {
@@ -269,7 +241,7 @@ function useHeroVideoPlayback(enabled) {
   }, [enabled]);
 }
 
-function useActiveCase(projects) {
+function useActiveCase() {
   const getActiveCase = () => {
     const slug = window.location.hash.replace("#case/", "");
     return projects.find((project) => project.slug === slug && project.pdfPages) || null;
@@ -280,9 +252,8 @@ function useActiveCase(projects) {
   useEffect(() => {
     const handleHashChange = () => setActiveCase(getActiveCase());
     window.addEventListener("hashchange", handleHashChange);
-    handleHashChange();
     return () => window.removeEventListener("hashchange", handleHashChange);
-  }, [projects]);
+  }, []);
 
   useEffect(() => {
     if (activeCase) window.scrollTo(0, 0);
@@ -319,11 +290,9 @@ function scrollToHomeSection(href) {
   window.setTimeout(scroll, 260);
 }
 
-function SiteHeader({ isAdmin = false, onLogin, onLogout }) {
+function SiteHeader() {
   const handleAnchorClick = (event, href) => {
-    const shouldRestoreHome = window.location.hash.startsWith("#case/")
-      || window.location.hash === "#analytics"
-      || window.location.hash === "#project-manager";
+    const shouldRestoreHome = window.location.hash.startsWith("#case/") || window.location.hash === "#analytics";
     if (!shouldRestoreHome) return;
 
     event.preventDefault();
@@ -350,12 +319,6 @@ function SiteHeader({ isAdmin = false, onLogin, onLogout }) {
             </a>
           ))}
         </nav>
-        <div className="header-actions">
-          {isAdmin ? <a className="nav-manager" href="#project-manager">项目管理</a> : null}
-          <button className="nav-login" onClick={isAdmin ? onLogout : onLogin} type="button">
-            {isAdmin ? "退出" : "登录"}
-          </button>
-        </div>
       </header>
 
       <nav className="mobile-bottom-nav" aria-label="移动端主导航">
@@ -369,7 +332,7 @@ function SiteHeader({ isAdmin = false, onLogin, onLogout }) {
   );
 }
 
-function CasePdfPage({ project, isAdmin, onLogin, onLogout }) {
+function CasePdfPage({ project }) {
   useEffect(() => {
     const startedAt = Date.now();
     trackCaseOpen(project);
@@ -378,7 +341,7 @@ function CasePdfPage({ project, isAdmin, onLogin, onLogout }) {
 
   return (
     <>
-      <SiteHeader isAdmin={isAdmin} onLogin={onLogin} onLogout={onLogout} />
+      <SiteHeader />
       <main className="case-page">
         <section className="case-shell">
           <div className="case-page-stack" aria-label={`${project.title}作品集`}>
@@ -398,334 +361,24 @@ function CasePdfPage({ project, isAdmin, onLogin, onLogout }) {
   );
 }
 
-function LoginDialog({ onClose, onSuccess }) {
-  const [loginEmail, setLoginEmail] = useState(adminEmail);
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!isSupabaseConfigured || !supabase) {
-      setError("尚未配置 Supabase，请先填写 .env.local 中的连接信息。");
-      return;
-    }
-
-    setError("");
-    setIsSubmitting(true);
-    try {
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email: loginEmail.trim(),
-        password,
-      });
-
-      if (signInError) throw signInError;
-      if (!isAdminUser(data.user)) {
-        await supabase.auth.signOut();
-        throw new Error("这个账号没有项目管理权限。");
-      }
-
-      onSuccess(data.user);
-      onClose();
-    } catch (loginError) {
-      setError(loginError.message || "登录失败，请检查邮箱和密码。");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <div className="login-dialog-backdrop" role="presentation" onMouseDown={onClose}>
-      <section aria-labelledby="login-title" className="login-dialog" onMouseDown={(event) => event.stopPropagation()}>
-        <button aria-label="关闭登录窗口" className="dialog-close" onClick={onClose} type="button">×</button>
-        <span className="eyebrow">Admin Access</span>
-        <h1 id="login-title">项目管理登录</h1>
-        <p>登录后可上传并管理作品项目。</p>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="admin-email">管理员邮箱</label>
-          <input
-            autoComplete="email"
-            id="admin-email"
-            onChange={(event) => setLoginEmail(event.target.value)}
-            placeholder="name@example.com"
-            type="email"
-            value={loginEmail}
-          />
-          <label htmlFor="admin-password">登录密码</label>
-          <input
-            autoFocus
-            autoComplete="current-password"
-            id="admin-password"
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="请输入密码"
-            type="password"
-            value={password}
-          />
-          {error ? <p className="form-error">{error}</p> : null}
-          <button className="button primary" disabled={isSubmitting} type="submit">{isSubmitting ? "登录中..." : "登录"}</button>
-        </form>
-      </section>
-    </div>
-  );
-}
-
-function ProjectManager({ projects, onCreate, onDelete, onUpdate }) {
-  const [coverFile, setCoverFile] = useState(null);
-  const [projectFiles, setProjectFiles] = useState([]);
-  const [editingProject, setEditingProject] = useState(null);
-  const [uploadKey, setUploadKey] = useState(0);
-  const [error, setError] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
-  const [form, setForm] = useState({
-    title: "",
-    subtitle: "",
-    summary: "",
-    tags: "",
-    category: "other",
-  });
-
-  const updateField = (field) => (event) => {
-    setForm((current) => ({ ...current, [field]: event.target.value }));
-  };
-
-  const resetEditor = () => {
-    setEditingProject(null);
-    setForm({ title: "", subtitle: "", summary: "", tags: "", category: "other" });
-    setCoverFile(null);
-    setProjectFiles([]);
-    setUploadKey((current) => current + 1);
-  };
-
-  const handleEdit = (project) => {
-    setEditingProject(project);
-    setForm({
-      title: project.title,
-      subtitle: project.subtitle || "",
-      summary: project.summary,
-      tags: project.tags.join(", "),
-      category: project.category,
-    });
-    setCoverFile(null);
-    setProjectFiles([]);
-    setError("");
-    setUploadKey((current) => current + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formElement = event.currentTarget;
-    setError("");
-
-    if (!coverFile && !editingProject) {
-      setError("请先上传项目封面。");
-      return;
-    }
-
-    setIsSaving(true);
-    try {
-      if (editingProject) {
-        await onUpdate({ project: editingProject, form, coverFile, projectFiles });
-      } else {
-        await onCreate({ form, coverFile, projectFiles });
-      }
-      formElement.reset();
-      resetEditor();
-    } catch (saveError) {
-      setError(saveError.message || "图片保存失败，请检查 Storage 配置和图片体积。");
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  return (
-    <main className="project-manager-page">
-      <section className="shell project-manager-shell">
-        <div className="project-manager-heading">
-          <span className="eyebrow">Project Manager</span>
-          <h1>{editingProject ? "编辑项目" : "上传新项目"}</h1>
-          <p>{editingProject ? "可直接更新项目资料；不选择新图片时会保留当前图片。" : "封面用于项目卡片，多张项目图片会展示在二级详情页面。"}</p>
-        </div>
-
-        <form className="project-manager-form" onSubmit={handleSubmit}>
-          <label className="upload-field">
-            <span>项目封面</span>
-            <input accept="image/*" key={`cover-${uploadKey}`} onChange={(event) => setCoverFile(event.target.files?.[0] || null)} type="file" />
-            <small>{coverFile ? coverFile.name : editingProject ? "留空则保留当前封面" : "选择封面图片"}</small>
-          </label>
-          <label>
-            <span>项目标题</span>
-            <input onChange={updateField("title")} placeholder="例如：园企通LOGO设计" required value={form.title} />
-          </label>
-          <label>
-            <span>英文标题</span>
-            <input onChange={updateField("subtitle")} placeholder="例如：Park-Enterprise Connect" value={form.subtitle} />
-          </label>
-          <label className="form-wide">
-            <span>项目说明</span>
-            <textarea onChange={updateField("summary")} placeholder="填写项目背景、设计亮点或成果。" required rows="5" value={form.summary} />
-          </label>
-          <label>
-            <span>标签</span>
-            <input onChange={updateField("tags")} placeholder="用逗号分隔，例如：LOGO设计, 品牌包装" value={form.tags} />
-          </label>
-          <label>
-            <span>项目分类</span>
-            <select onChange={updateField("category")} value={form.category}>
-              <option value="mobile">移动端</option>
-              <option value="web">Web端</option>
-              <option value="other">其他设计</option>
-            </select>
-          </label>
-          <label className="upload-field form-wide">
-            <span>项目图片</span>
-            <input accept="image/*" key={`detail-${uploadKey}`} multiple onChange={(event) => setProjectFiles(Array.from(event.target.files || []))} type="file" />
-            <small>{projectFiles.length ? `已选择 ${projectFiles.length} 张项目图片` : editingProject ? "选择新图片后将替换当前详情图" : "可一次选择多张，用于详情页面"}</small>
-          </label>
-          {error ? <p className="form-error form-wide">{error}</p> : null}
-          <div className="form-actions form-wide">
-            {editingProject ? <button className="button secondary" onClick={resetEditor} type="button">取消编辑</button> : null}
-            <button className="button primary" disabled={isSaving} type="submit">{isSaving ? "正在保存..." : editingProject ? "保存修改" : "发布项目"}</button>
-          </div>
-        </form>
-
-        <section className="managed-projects" aria-labelledby="managed-projects-title">
-          <div className="managed-projects-heading">
-            <h2 id="managed-projects-title">已上传项目</h2>
-            <span>{projects.length} 个项目</span>
-          </div>
-          {projects.length ? (
-            <div className="managed-project-list">
-              {projects.map((project) => (
-                <article className="managed-project-row" key={project.id}>
-                  <img alt="" src={project.image} />
-                  <div>
-                    <h3>{project.title}</h3>
-                    <p>{project.subtitle || "未填写英文标题"}</p>
-                  </div>
-                  <div className="managed-project-actions">
-                    <button className="edit-button" onClick={() => handleEdit(project)} type="button">编辑</button>
-                    <button className="text-button" onClick={() => onDelete(project)} type="button">删除</button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : <p className="managed-empty">还没有上传项目。</p>}
-        </section>
-      </section>
-    </main>
-  );
-}
-
 function App() {
   const currentHash = useCurrentHash();
-  const [projectFilter, setProjectFilter] = useState("all");
-  const [managedProjects, setManagedProjects] = useState([]);
-  const [authUser, setAuthUser] = useState(null);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const allProjects = useMemo(() => [...baseProjects, ...managedProjects], [managedProjects]);
-  const activeCase = useActiveCase(allProjects);
-  const isAdmin = isAdminUser(authUser);
+  const activeCase = useActiveCase();
   const isAnalyticsPage = currentHash === "#analytics";
-  const isProjectManagerPage = currentHash === "#project-manager";
-  const isHomePage = !activeCase && !isAnalyticsPage && !isProjectManagerPage;
-  const projectTabs = [
-    ["全部", "all"],
-    ["移动端", "mobile"],
-    ["Web端", "web"],
-    ["其他设计", "other"],
-  ];
-  const visibleProjects = allProjects.filter((project) => {
-    if (projectFilter === "all") return true;
-    if (projectFilter === "featured") return project.featured;
-    return project.category === projectFilter;
-  });
+  const isHomePage = !activeCase && !isAnalyticsPage;
 
-  useRevealOnScroll(isHomePage, projectFilter);
+  useRevealOnScroll(isHomePage);
   useHeroVideoPlayback(isHomePage);
 
   useEffect(() => {
     initAnalytics();
   }, []);
 
-  useEffect(() => {
-    listManagedProjects().then(setManagedProjects).catch((error) => {
-      console.warn("无法读取云端项目。", error);
-      setManagedProjects([]);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!supabase) return undefined;
-
-    supabase.auth.getSession().then(({ data }) => setAuthUser(data.session?.user || null));
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setAuthUser(session?.user || null);
-    });
-
-    return () => authListener.subscription.unsubscribe();
-  }, []);
-
-  const handleProjectCreate = async (payload) => {
-    const project = await saveManagedProject(payload);
-    setManagedProjects((current) => [project, ...current]);
-  };
-
-  const handleProjectDelete = async (project) => {
-    await removeManagedProject(project);
-    setManagedProjects((current) => current.filter((item) => item.id !== project.id));
-  };
-
-  const handleProjectUpdate = async (payload) => {
-    const project = await updateManagedProject(payload);
-    setManagedProjects((current) => current.map((item) => (item.id === project.id ? project : item)));
-  };
-
-  const handleLogout = async () => {
-    if (supabase) await supabase.auth.signOut();
-    setAuthUser(null);
-    if (window.location.hash === "#project-manager") window.location.hash = "#top";
-  };
-
-  const headerProps = {
-    isAdmin,
-    onLogin: () => setIsLoginOpen(true),
-    onLogout: handleLogout,
-  };
-
   if (isAnalyticsPage) {
     return (
       <>
-        <SiteHeader {...headerProps} />
+        <SiteHeader />
         <AnalyticsDashboard />
-        {isLoginOpen ? <LoginDialog onClose={() => setIsLoginOpen(false)} onSuccess={setAuthUser} /> : null}
-      </>
-    );
-  }
-
-  if (isProjectManagerPage) {
-    return (
-      <>
-        <SiteHeader {...headerProps} />
-        {isAdmin ? (
-          <ProjectManager
-            onCreate={handleProjectCreate}
-            onDelete={handleProjectDelete}
-            onUpdate={handleProjectUpdate}
-            projects={managedProjects}
-          />
-        ) : (
-          <main className="project-manager-page">
-            <section className="shell project-manager-locked">
-              <span className="eyebrow">Admin Access</span>
-              <h1>{isSupabaseConfigured ? "项目管理需要登录" : "请先配置 Supabase"}</h1>
-              {!isSupabaseConfigured ? <p>在 .env.local 填入 Supabase 项目地址、发布密钥和管理员邮箱后，即可启用云端项目管理。</p> : null}
-              <button className="button primary" onClick={() => setIsLoginOpen(true)} type="button">立即登录</button>
-            </section>
-          </main>
-        )}
-        {isLoginOpen ? <LoginDialog onClose={() => setIsLoginOpen(false)} onSuccess={setAuthUser} /> : null}
       </>
     );
   }
@@ -733,15 +386,14 @@ function App() {
   if (activeCase) {
     return (
       <>
-        <CasePdfPage {...headerProps} project={activeCase} />
-        {isLoginOpen ? <LoginDialog onClose={() => setIsLoginOpen(false)} onSuccess={setAuthUser} /> : null}
+        <CasePdfPage project={activeCase} />
       </>
     );
   }
 
   return (
     <>
-      <SiteHeader {...headerProps} />
+      <SiteHeader />
 
       <main id="top">
         <section className="hero-section">
@@ -853,24 +505,10 @@ function App() {
                 <span className="eyebrow">Selected Projects</span>
                 <h2>精选项目</h2>
                 <p>聚焦金融科技、企业数字化与智慧园区等领域，精选从 0-1 设计、体验优化到设计规范搭建的代表项目。</p>
-                <div className="project-tabs" role="tablist" aria-label="项目分类">
-                  {projectTabs.map(([label, value]) => (
-                    <button
-                      aria-selected={projectFilter === value}
-                      className={projectFilter === value ? "is-active" : ""}
-                      key={value}
-                      onClick={() => setProjectFilter(value)}
-                      role="tab"
-                      type="button"
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               <div className="project-list">
-                {visibleProjects.map((project, index) => (
+                {projects.map((project, index) => (
                   <BorderGlow
                     animated={index === 0}
                     backgroundColor="rgba(9, 14, 16, 0.72)"
@@ -909,11 +547,12 @@ function App() {
                       {project.subtitle ? <span className="project-subtitle">{project.subtitle}</span> : null}
                       <p>{project.summary}</p>
                       <div className="project-foot">
-                        <div className="project-foot-tags" aria-label="项目标签">
-                          {project.tags
-                            .filter((tag) => tag !== "OA 系统" && tag !== "AI 顾问")
-                            .map((tag) => <span key={tag}>{tag}</span>)}
+                        <div className="project-foot-tags" aria-label={`${project.title}标签`}>
+                          {project.tags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
                         </div>
+                        <strong>{project.stat}</strong>
                       </div>
                     </div>
                     {project.pdfPages ? (
@@ -974,7 +613,6 @@ function App() {
           </section>
         </div>
       </main>
-      {isLoginOpen ? <LoginDialog onClose={() => setIsLoginOpen(false)} onSuccess={setAuthUser} /> : null}
     </>
   );
 }
