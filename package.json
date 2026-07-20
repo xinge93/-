@@ -4,14 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 5173 --strictPort",
+    "dev": "concurrently -k \"npm:dev:vite\" \"npm:dev:api\"",
+    "dev:vite": "vite --host 0.0.0.0 --port 5173 --strictPort",
+    "dev:api": "node server/analytics-server.js",
     "build": "vite build",
     "analytics:dev": "node server/analytics-server.js",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.110.6",
     "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^10.0.3",
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
     "ogl": "^1.0.11",
     "postprocessing": "^6.39.1",
     "react": "^19.0.0",

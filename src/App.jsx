@@ -6,7 +6,6 @@ import TiltedPhoto from "./TiltedPhoto.jsx";
 import AnalyticsDashboard from "./AnalyticsDashboard.jsx";
 import { initAnalytics, trackCaseClose, trackCaseOpen, trackProjectClick } from "./analytics.js";
 import { listManagedProjects, removeManagedProject, saveManagedProject, updateManagedProject } from "./projectStore.js";
-import { adminEmail, isAdminUser, isSupabaseConfigured, supabase } from "./supabase.js";
 
 const email = "516295798@qq.com";
 
@@ -392,78 +391,6 @@ function CasePdfPage({ project }) {
   );
 }
 
-function LoginDialog({ onClose, onSuccess }) {
-  const [loginEmail, setLoginEmail] = useState(adminEmail);
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!isSupabaseConfigured || !supabase) {
-      setError("尚未配置 Supabase，请先填写 .env.local 中的连接信息。");
-      return;
-    }
-
-    setError("");
-    setIsSubmitting(true);
-    try {
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email: loginEmail.trim(),
-        password,
-      });
-
-      if (signInError) throw signInError;
-      if (!isAdminUser(data.user)) {
-        await supabase.auth.signOut();
-        throw new Error("这个账号没有项目管理权限。");
-      }
-
-      onSuccess(data.user);
-      onClose();
-    } catch (loginError) {
-      setError(loginError.message || "登录失败，请检查邮箱和密码。");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <div className="login-dialog-backdrop" role="presentation" onMouseDown={onClose}>
-      <section aria-labelledby="login-title" className="login-dialog" onMouseDown={(event) => event.stopPropagation()}>
-        <button aria-label="关闭登录窗口" className="dialog-close" onClick={onClose} type="button">×</button>
-        <span className="eyebrow">Admin Access</span>
-        <h1 id="login-title">项目管理登录</h1>
-        <p>登录后可上传并管理作品项目。</p>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="admin-email">管理员邮箱</label>
-          <input
-            autoComplete="email"
-            id="admin-email"
-            onChange={(event) => setLoginEmail(event.target.value)}
-            placeholder="name@example.com"
-            type="email"
-            value={loginEmail}
-          />
-          <label htmlFor="admin-password">登录密码</label>
-          <input
-            autoFocus
-            autoComplete="current-password"
-            id="admin-password"
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="请输入密码"
-            type="password"
-            value={password}
-          />
-          {error ? <p className="form-error">{error}</p> : null}
-          <button className="button primary" disabled={isSubmitting} type="submit">{isSubmitting ? "登录中..." : "登录"}</button>
-        </form>
-      </section>
-    </div>
-  );
-}
-
 function ProjectManager({ projects, onCreate, onDelete, onUpdate }) {
   const [coverFile, setCoverFile] = useState(null);
   const [projectFiles, setProjectFiles] = useState([]);
@@ -616,11 +543,8 @@ function App() {
   const currentHash = useCurrentHash();
   const [projectFilter, setProjectFilter] = useState("all");
   const [managedProjects, setManagedProjects] = useState([]);
-  const [authUser, setAuthUser] = useState(null);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const allProjects = useMemo(() => [...baseProjects, ...managedProjects], [managedProjects]);
   const activeCase = useActiveCase(allProjects);
-  const isAdmin = isAdminUser(authUser);
   const isLocalManagerHost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
   const isAnalyticsPage = isLocalManagerHost && currentHash === "#analytics";
   const isProjectManagerPage = isLocalManagerHost && currentHash === "#project-manager";
@@ -657,17 +581,6 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    if (!supabase) return undefined;
-
-    supabase.auth.getSession().then(({ data }) => setAuthUser(data.session?.user || null));
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setAuthUser(session?.user || null);
-    });
-
-    return () => authListener.subscription.unsubscribe();
-  }, []);
-
   const handleProjectCreate = async (payload) => {
     const project = await saveManagedProject(payload);
     setManagedProjects((current) => [project, ...current]);
@@ -696,24 +609,12 @@ function App() {
     return (
       <>
         <SiteHeader />
-        {isAdmin ? (
-          <ProjectManager
-            onCreate={handleProjectCreate}
-            onDelete={handleProjectDelete}
-            onUpdate={handleProjectUpdate}
-            projects={managedProjects}
-          />
-        ) : (
-          <main className="project-manager-page">
-            <section className="shell project-manager-locked">
-              <span className="eyebrow">Admin Access</span>
-              <h1>{isSupabaseConfigured ? "项目管理需要登录" : "请先配置 Supabase"}</h1>
-              {!isSupabaseConfigured ? <p>在 .env.local 填入 Supabase 项目地址、发布密钥和管理员邮箱后，即可启用云端项目管理。</p> : null}
-              <button className="button primary" onClick={() => setIsLoginOpen(true)} type="button">立即登录</button>
-            </section>
-          </main>
-        )}
-        {isLoginOpen ? <LoginDialog onClose={() => setIsLoginOpen(false)} onSuccess={setAuthUser} /> : null}
+        <ProjectManager
+          onCreate={handleProjectCreate}
+          onDelete={handleProjectDelete}
+          onUpdate={handleProjectUpdate}
+          projects={managedProjects}
+        />
       </>
     );
   }
