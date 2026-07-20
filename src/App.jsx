@@ -562,8 +562,11 @@ function App() {
     if (projectFilter === "featured") return project.featured;
     return project.category === projectFilter;
   });
+  const projectRevealKey = `${projectFilter}:${managedProjects
+    .map((project) => `${project.id}:${project.coverUrl}`)
+    .join("|")}`;
 
-  useRevealOnScroll(isHomePage, projectFilter);
+  useRevealOnScroll(isHomePage, projectRevealKey);
   useHeroVideoPlayback(isHomePage);
 
   useEffect(() => {
