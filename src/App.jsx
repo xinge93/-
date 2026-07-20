@@ -403,7 +403,7 @@ function ProjectManager({ projects, onCreate, onDelete, onUpdate }) {
     subtitle: "",
     summary: "",
     tags: "",
-    category: "other",
+    category: "all",
   });
 
   const updateField = (field) => (event) => {
@@ -412,7 +412,7 @@ function ProjectManager({ projects, onCreate, onDelete, onUpdate }) {
 
   const resetEditor = () => {
     setEditingProject(null);
-    setForm({ title: "", subtitle: "", summary: "", tags: "", category: "other" });
+    setForm({ title: "", subtitle: "", summary: "", tags: "", category: "all" });
     setCoverFile(null);
     setProjectFiles([]);
     setUploadKey((current) => current + 1);
@@ -492,12 +492,14 @@ function ProjectManager({ projects, onCreate, onDelete, onUpdate }) {
             <input onChange={updateField("tags")} placeholder="用逗号分隔，例如：LOGO设计, 品牌包装" value={form.tags} />
           </label>
           <label>
-            <span>项目分类</span>
+            <span>额外项目分类</span>
             <select onChange={updateField("category")} value={form.category}>
+              <option value="all">仅归类到全部</option>
               <option value="mobile">移动端</option>
               <option value="web">Web端</option>
               <option value="other">其他设计</option>
             </select>
+            <small>所有项目都会显示在“全部”中；可按需要选择一个额外分类。</small>
           </label>
           <label className="upload-field form-wide">
             <span>项目图片</span>

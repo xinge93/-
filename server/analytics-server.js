@@ -110,7 +110,7 @@ async function parseProjectRequest(request, isNewProject) {
     subtitle: String(request.body.subtitle || "").trim(),
     summary,
     tags: normalizeTags(request.body.tags),
-    category: ["mobile", "web", "other"].includes(request.body.category) ? request.body.category : "other",
+    category: ["all", "mobile", "web", "other"].includes(request.body.category) ? request.body.category : "all",
     coverFile,
     detailFiles: request.files?.images || [],
   };
